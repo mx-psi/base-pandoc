@@ -1,0 +1,53 @@
+% pandoc-crossref START
+% CAUTION: Deleting these lines might cause unexpected behavior
+% when using pandoc-crossref
+\makeatletter
+\@ifpackageloaded{subfig}{}{\usepackage{subfig}}
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\captionsetup[subfloat]{margin=0.5em}
+\AtBeginDocument{%
+\renewcommand*\figurename{}
+\renewcommand*\tablename{}
+}
+\AtBeginDocument{%
+\renewcommand*\listfigurename{}
+\renewcommand*\listtablename{}
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{}
+\newcommand*\listoflistings{\listof{codelisting}{}}
+\makeatother
+% pandoc-crossref END
+
+\usepackage{amsthm}
+
+\newtheoremstyle{plain}% name of the style to be used
+  {5pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {5pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {}% measure of space to indent
+  {\bfseries}% name of head font
+  {:}% punctuation between head and body
+  {.5em}% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+
+  \makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+    \pushQED{\qed}%
+    \normalfont \topsep6\p@\@plus6\p@\relax
+    \trivlist
+    \item[\hskip\labelsep
+        \itshape
+        #1\@addpunct{.} ]\mbox{}\par\nobreak}
+    {\popQED\endtrivlist\@endpefalse}
+    \makeatother
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{principle}{Principle}
