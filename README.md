@@ -1,15 +1,13 @@
-# `base-pandoc`
+# base-pandoc
 
 A basic `pandoc` setup for creating PDF documents.
 
 ## What is this?
 
-It is a ready-to-clone repository to start your `pandoc` [Markdown](http://pandoc.org/MANUAL.html#pandocs-markdown)[^what-markdown] to PDF project.
-Install the dependencies, clone this repository and you are ready to go!
+It is a ready-to-clone repository to start your `pandoc` [Markdown](https://commonmark.org/help/tutorial)-to-PDF project.
+Install the dependencies, clone the project and you are ready to go!
 
 The idea is to provide a minimal setup for creating documents that use several pandoc filters.
-
-[^what-markdown]: Don't know Markdown? You can use [this tutorial](https://commonmark.org/help/tutorial). Pandoc's allows you to use your favorite Markdown standard and even some extra features that you can check at [the manual](http://pandoc.org/MANUAL.html#extensions)
 
 ## How do I install it?
 
@@ -24,7 +22,9 @@ If everything goes well you can type `make` and you will get a pdf version of th
 
 ## How do I use it?
 
-Edit the `SRCS` variable to change the list of source files. Apart from pandoc's basic Markdown you can use:
+Edit the `SRCS` variable to change the list of source files. 
+
+Pandoc allows you to use your favorite Markdown standard and some extra features that you can check at [the manual](http://pandoc.org/MANUAL.html#extensions). In this repository you can also use:
 
 - [citations](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md); an empty BibTeX file is provided at `citations.bib` and a simple CSL style is provided at `style.csl`, 
 - [cross-references](https://lierdakil.github.io/pandoc-crossref/) and 
