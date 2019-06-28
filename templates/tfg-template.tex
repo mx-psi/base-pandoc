@@ -1,0 +1,320 @@
+%% Plantilla para TFGs del doble grado en Ingeniería Informática y Matemáticas de la UGR adaptada de
+%% 1. plantilla por defecto de `pandoc' para documentos LaTeX y
+%% 2. plantilla de Francisco Torralbo Torralbo para TFGs del grado en Matemáticas de la UGR.
+
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass{$documentclass$}
+
+\KOMAoptions{%
+  fontsize=11pt,        % Tamaño de fuente
+  paper=a4,             % Tamaño del papel
+  headings=normal,      % Tamaño de letra para los títulos: small, normal, big
+  parskip=half,         % Espacio entre párrafos: full (una línea) o half (media línea)
+  headsepline=false,    % Una linea separa la cabecera del texto
+  cleardoublepage=empty,% No imprime cabecera ni pie en páginas en blanco
+  chapterprefix=false,  % No antepone el texto "capítulo" antes del número
+  appendixprefix=false,	% No antepone el texto "Apéndice" antes de la letra
+  bibliography=totoc,	  % Añade a la tabla de contenidos una entrada para bibliografía
+  BCOR=5mm,           % Reserva margen interior para la encuadernación.
+                        % El valor dependerá el tipo de encuadernado y del grosor del libro.
+  DIV=11,             % Cálcula el diseño de página según ciertos
+                        % parámetros. Al aumentar el número aumentamos el ancho de texto y disminuimos el ancho del margen. Una opción de 14 producirá márgenes estrechos y texto ancho.
+}
+
+
+\usepackage{lmodern}
+
+% https://tex.stackexchange.com/a/324757
+% Palatino for main text and math
+\usepackage[osf,sc]{mathpazo}
+
+% Helvetica for sans serif
+% (scaled to match size of Palatino)
+\usepackage[scaled=0.90]{helvet}
+
+% Bera Mono for monospaced
+% (scaled to match size of Palatino)
+\usepackage[scaled=0.85]{beramono}
+
+
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+  \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\raggedbottom
+
+\usepackage{xcolor}
+\usepackage[backref=page]{hyperref}
+\hypersetup{
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{2}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage[a-1b]{pdfx}
+\usepackage{fixme}
+\fxsetup{
+  author={$author$},
+  status=draft,
+  layout=pdfcmargin
+}
+\usepackage{comment}
+
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+	\put(0,0){%
+		\parbox[b][\paperheight]{\paperwidth}{%
+			\vfill
+			\centering
+      % Indicar la imagen de fondo en el siguiente comando
+			\includegraphics[width=\paperwidth,height=\paperheight,%
+			keepaspectratio]{templates/$portada$}%
+			\vfill
+    }}}
+
+
+\usepackage{bookmark}
+
+% pandoc-crossref START
+% CAUTION: Deleting these lines might cause unexpected behavior
+% when using pandoc-crossref
+\makeatletter
+\@ifpackageloaded{subfig}{}{\usepackage{subfig}}
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\captionsetup[subfloat]{margin=0.5em}
+\AtBeginDocument{%
+\renewcommand*\figurename{}
+\renewcommand*\tablename{}
+}
+\AtBeginDocument{%
+\renewcommand*\listfigurename{}
+\renewcommand*\listtablename{}
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{}
+\newcommand*\listoflistings{\listof{codelisting}{}}
+\makeatother
+% pandoc-crossref END
+
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(lang)$
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+$if(babel-newcommands)$
+  $babel-newcommands$
+$endif$
+\else
+  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+$for(polyglossia-otherlangs)$
+  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+$endfor$
+\fi
+$endif$
+$if(dir)$
+\ifxetex
+  % load bidi as late as possible as it modifies e.g. graphicx
+  $if(latex-dir-rtl)$
+  \usepackage[RTLdocument]{bidi}
+  $else$
+  \usepackage{bidi}
+  $endif$
+\fi
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \TeXXeTstate=1
+  \newcommand{\RL}[1]{\beginR #1\endR}
+  \newcommand{\LR}[1]{\beginL #1\endL}
+  \newenvironment{RTL}{\beginR}{\endR}
+  \newenvironment{LTR}{\beginL}{\endL}
+\fi
+$endif$
+
+
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+$if(subtitle)$
+\providecommand{\subtitle}[1]{}
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(institute)$
+\providecommand{\institute}[1]{}
+\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+$endif$
+
+\begin{document}
+\begin{titlepage}
+  \AddToShipoutPicture*{\BackgroundPic}
+  \phantomsection
+  \pdfbookmark[1]{Title}{title}
+
+  % Para que el título esté centrado en la página.
+  % Los valores numéricos deberán elegirse de acuerdo con el diseño de
+  % página (sobre todo si se cambia la opción BCOR o DIV).
+  \begin{addmargin}[2.575cm]{0cm}
+  \begin{flushleft}
+    \Large
+    \hfill\vfil
+
+    \vfill\vfill
+
+    \textsf{Facultad de Ciencias} \\
+    \textsf{E.T.S. de Ingenierías Informática y de Telecomunicación} \\
+    \vfill\vfill
+
+    {\huge\textsf Doble Grado en Ingeniería Informática y Matemáticas} \vfill
+
+
+    \textsc{trabajo de fin de grado}
+
+    \begingroup
+    \Huge{$title$} \\ \bigskip
+    \endgroup
+
+    \vfill\vfill\vfill\vfill
+
+    \textsf{\normalsize{Presentado por:}}
+    {\huge\textrm{$author$}}
+
+    \vspace*{0.7cm}
+
+    \textsf{\normalsize{Tutor:}}
+    {\huge\textrm{$tutor$}}
+
+    \vfill
+    \textsf{Curso académico $curso$}
+  \end{flushleft}
+  \end{addmargin}
+
+\end{titlepage}
+\cleardoublepage
+
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+  {
+    $if(colorlinks)$
+    \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
+    $endif$
+  \setcounter{tocdepth}{$toc-depth$}
+  \tableofcontents
+  }
+$endif$
+
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+
+\end{document}
